@@ -20,9 +20,8 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
         $password = hash("sha256", $password);
-        
+
         $send -> execute();
-        if()
     }
     ?>
 </body>
