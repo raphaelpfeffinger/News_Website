@@ -54,7 +54,7 @@
         $land = $_POST['land'];
         $telefon = $_POST['telefon'];
         $email = $_POST['email'];
-        $password = hash("sha256", $password);
+        $password = password_hash($password, "md5");
         $prove = $conn -> query("SELECT * FROM users WHERE Benutzername= '$username'");
         if(mysqli_num_rows($prove) == 0){
             $stmt -> execute();

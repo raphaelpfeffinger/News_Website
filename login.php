@@ -19,9 +19,8 @@
     if(isset($_POST['submit'])){
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $password = hash("sha256", $password);
+        $password = password_hash($password, "md5");
 
-        $send -> execute();
     }
     ?>
 </body>
