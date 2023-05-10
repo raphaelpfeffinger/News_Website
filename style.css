@@ -1,6 +1,9 @@
 #logo{
     width: 100px;
     height: 100px;
-    margin-left: -30px;
+    margin-left: -30cm;
     margin-top: -10px;
+}
+h1 {
+    color: green;
 }
