@@ -8,6 +8,7 @@
 </head>
 <body>
 <a href="index.php">home</a>
+<a href="create_category.php">create new Category</a>
     <form id="news" action="create_news.php" method="post">
         <p>Please enter your news</p>
         <label for="title">Title:</label>

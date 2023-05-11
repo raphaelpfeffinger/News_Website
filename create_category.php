@@ -13,5 +13,24 @@
         <input type="text" name="cat" id="cat">
         <input type="submit" name="submit" id="submit">
     </form>
+
+    <?php 
+    require "cb_conn.php";
+    if(isset($_POST["submit"])){
+        $prepare = $conn -> prepare("INSERT INTO kategories(kategorie) VALUES(?)");
+        $prepare -> bind_param("s", $name);
+
+        $name = $_POST["cat"];
+
+        $prove = $conn -> query("SELECT * FROM kategories WHERE kategorie = '$name'");
+        if(mysqli_num_rows($prove) == 0){
+            $prepare -> execute();
+            header("location: create_news.php");
+        } else{
+            echo "the Category: $name already exists";
+        }
+    }
+    ?>
+
 </body>
 </html>

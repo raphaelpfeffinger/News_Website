@@ -1,9 +1,31 @@
+body{
+    background-color: rgb(48, 46, 46);
+
+}
+#login{
+    background-color: rgb(68, 68, 68);
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 380px;
+    margin-right: 380px;
+    margin-bottom: 300px;
+    padding: 50px;
+    color: white;
+    box-shadow: 200px, 200px, rgb(0, 0, 0);
+    
+}
+#username, #password{
+    padding-left: 10px;
+    background-color: rgb(0, 0, 0);
+}
 #logo{
     width: 100px;
     height: 100px;
-    margin-left: -30cm;
+    margin-left: 10px;
     margin-top: -10px;
+    color: white;
 }
-h1 {
-    color: green;
+#label, #label2{
+    text-align: left;
+    margin-left: 10px;
 }

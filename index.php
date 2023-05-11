@@ -10,6 +10,7 @@
     <body>
         <a href="index.php">Home</a>
         <a href="index.php"><img src="logo.png" id="logo"></a>
+        <a href="archive.php">Archive</a>
         
 
         <?php
