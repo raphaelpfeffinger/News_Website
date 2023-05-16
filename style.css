@@ -1,9 +1,9 @@
 body{
-    background-color: rgb(48, 46, 46);
+    background-color: rgba(86, 85, 138, 0.726);
 
 }
 #login{
-    background-color: rgb(68, 68, 68);
+    background-color: rgba(55, 55, 110, 0.836);
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     margin-left: 380px;
@@ -11,12 +11,19 @@ body{
     margin-bottom: 300px;
     padding: 50px;
     color: white;
-    box-shadow: 200px, 200px, rgb(0, 0, 0);
+    box-shadow: 2em, 2cm, rgb(0, 0, 0);
     
 }
 #username, #password{
     padding-left: 10px;
-    background-color: rgb(0, 0, 0);
+    background-color: transparent;
+    color: white;
+    border-color: solid ,rgb(0, 0, 0);
+    
+    
+}
+#password{
+    margin-bottom: 30px;
 }
 #logo{
     width: 100px;
@@ -27,5 +34,19 @@ body{
 }
 #label, #label2{
     text-align: left;
-    margin-left: 10px;
+    margin-left: 86px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+#submit{
+    text-align: left;
+    margin-left: 86px;
+}
+h1{
+    margin-top: -10px;
+    margin-bottom: 50px;
+    color: white;
+}
+#letsgo{
+    background-color: black;
 }

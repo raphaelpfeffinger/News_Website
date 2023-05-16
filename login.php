@@ -14,21 +14,25 @@
 
 <body>
     <a href="index.php"><img src="logo.png" id="logo" width="6%"></a>
-    <form action="login.php" method="post">
-        <div id="login">
-            <h1 id="logintitle">LOGIN</h1>
-            <div id="label" name="label">
-                <label for="username">Username</label><br>
+    <div name="divlogin" id="divlogin">
+        <form action="login.php" method="post">
+            <div id="login">
+                <h1 id="logintitle">LOGIN</h1>
+                <div id="label" name="label">
+                    <label for="username">Username</label><br>
+                </div>
+                <input type="text" name="username" id="username" required><br>
+                <div id="label2" name="label2">
+                    <label for="password">Password</label><br>
+                </div>
+                <input type="password" name="password" id="password" required><br>
+                <div id="submit">
+                    <input type="submit" value="Login" name="submit" id="letsgo">
+                </div>
+                <a href="register.php">Sign up</a>
             </div>
-            <input type="text" name="username" id="username" required><br>
-            <div id="label2" name="label2">
-                <label for="password">Password</label><br>
-            </div>
-            <input type="password" name="password" id="password" required><br>
-            <input type="submit" value="Login" name="submit">
-            <a href="register.php">Sign up</a>
-        </div>
-    </form>
+        </form>
+    </div>
     
     <?php
     require "cb_conn.php";

@@ -8,7 +8,6 @@
 </head>
 <body>
 <a href="index.php">home</a>
-<a href="create_category.php">create new Category</a>
     <form id="news" action="create_news.php" method="post">
         <p>Please enter your news</p>
         <label for="title">Title:</label>
@@ -22,25 +21,42 @@
         <label for="createdate">Erstellt am: </label>
         <input type="date" name="createdate" id="createdate" required><br>
         <label for="category">Category:</label>
-        <select id="category" name="category"><a href="create_category.php">create new category</a>
-            <option value="Sport">Sport</option>
-            <option value="Politics">Politics</option>
-            <option value="Economy">Economy</option>
-            <option value="weather">Weather</option>
-            <option value="celebrities">Celebrities</option>
-            <option value="dailynews">Daily News</option>
-        <br><input type="submit" value="Submit" name="submit"><br>
-        </select><br>
+        <input type="text" id="category" name="category"required><br>
+        <label for="img">Bild zum Artikel</label>
+        <input type="file" id="img" name="img"><br>
+        <label for="link" >Quelle einfügen</label>
+        <input type="url" id="source" name="source"required><br>
+        <label for="autor">autor</label>
+        <input type="text" id="autor" name="autor"><br>
+        <input type="submit" name="submit" id="submit">
         <?php
         require "cb_conn.php";
         if(isset($_POST["submit"])){
+            
+            
+            $input = $conn -> prepare("INSERT INTO news(titel, inhalt, gueltigVon, gueltigBis, erstelltam, kid, link, bild, autor)");
+            //$input -> bind_param("");
+
             $title = $_POST["title"];
             $content = $_POST["content"];
             $datefrom = $_POST["datefrom"];
             $dateto = $_POST["dateto"];
             $category = $_POST["category"];
+            $cratedate = $_POST["createdate"];
+            $image = $_POST["img"];
+            $source = $_POST["source"];
+            $autor = $_POST["autor"];
+
+            $catchose = $conn -> query("SELECT * FROM kategories WHERE kategorie = '$category'");
+            if(mysqli_num_rows($catchose) == 0){
+                $catinput = $conn -> prepare("INSERT INTO kategories(kategorie) VALUES(?)");
+                $catinput -> bind_param("s", $category);
+                $catinput -> execute();
+            }
+            else {
+                $catid = $conn -> query("SELECT kid FROM kategories WHERE kategorie = '$category'");
+            }
             
-            $input = $conn -> prepare("INSERT INTO users(titel, inhalt, gueltigVon, gueltigBis, erstelltam,  )");
         }
 
         ?>

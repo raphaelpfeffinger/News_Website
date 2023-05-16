@@ -29,7 +29,10 @@
                 unset($_SESSION["Benutzername"]);
                 session_destroy();
             }
-        } 
+        }
+        $currentdate= date("now");
+        settype($currentdate, 'int');
+        echo $currentdate;
         
 
         ?>
