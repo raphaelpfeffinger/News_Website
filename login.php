@@ -43,10 +43,12 @@
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
         $hash = $row['Passwort'];
+        $userId = $row['uid'];
 
         if (password_verify($password, $hash)) {
             $_SESSION["Benutzername"] = $username;
             $_SESSION["loggedin"] = true;
+            $_SESSION["userid"] = $userId;
             header("location: index.php");
         } else {
             $_SESSION["Benutzername"] = "Nobody";

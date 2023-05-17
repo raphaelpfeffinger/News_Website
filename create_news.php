@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,48 +16,84 @@
         <label for="content">Content:</label>
         <textarea name="content" id="content" cols="30" rows="10" required></textarea><br>
         <label for="datefrom">Gültig von:</label>
-        <input type="text" name="datefrom" id="datefrom" required><br>
+        <input type="date" name="datefrom" id="datefrom" required><br>
         <label for="dateto">bis: </label>
-        <input type="text" name="dateto" id="dateto" required><br>
-        <label for="createdate">Erstellt am: </label>
-        <input type="date" name="createdate" id="createdate" required><br>
+        <input type="date" name="dateto" id="dateto" required><br>
         <label for="category">Category:</label>
         <input type="text" id="category" name="category"required><br>
         <label for="img">Bild zum Artikel</label>
         <input type="file" id="img" name="img"><br>
         <label for="link" >Quelle einfügen</label>
-        <input type="url" id="source" name="source"required><br>
-        <label for="autor">autor</label>
-        <input type="text" id="autor" name="autor"><br>
+        <input type="text" id="source" name="source" required><br>
         <input type="submit" name="submit" id="submit">
         <?php
         require "cb_conn.php";
         if(isset($_POST["submit"])){
             
-            
-            $input = $conn -> prepare("INSERT INTO news(titel, inhalt, gueltigVon, gueltigBis, erstelltam, kid, link, bild, autor)");
-            //$input -> bind_param("");
+            //prepared Statement
+            $input = $conn -> prepare("INSERT INTO news(titel, inhalt, gueltigVon, gueltigBis, erstelltam, kid, link, bild, autor) VALUES(?,?,?,?,?,?,?,?,?)");
+            $input -> bind_param("sssssssss", $title, $content, $datefrom, $dateto, $CurrentDate, $kid, $src, $image, $autor);
 
+            //define variables
             $title = $_POST["title"];
             $content = $_POST["content"];
             $datefrom = $_POST["datefrom"];
             $dateto = $_POST["dateto"];
             $category = $_POST["category"];
-            $cratedate = $_POST["createdate"];
+            $CurrentDate = date("Y-m-d");
             $image = $_POST["img"];
             $source = $_POST["source"];
-            $autor = $_POST["autor"];
+            $autor = $_SESSION["userid"];
 
+            //define the queries to prove the values
+            $titleprove = $conn -> query("SELECT * FROM news WHERE titel= '$title'");
             $catchose = $conn -> query("SELECT * FROM kategories WHERE kategorie = '$category'");
-            if(mysqli_num_rows($catchose) == 0){
-                $catinput = $conn -> prepare("INSERT INTO kategories(kategorie) VALUES(?)");
-                $catinput -> bind_param("s", $category);
-                $catinput -> execute();
-            }
-            else {
-                $catid = $conn -> query("SELECT kid FROM kategories WHERE kategorie = '$category'");
-            }
+
             
+
+            //if the category doesnt exists it will be inserted into kategories
+            if($datefrom < $CurrentDate || $dateto < $CurrentDate && $dateto < $datefrom){
+                echo "can't be in the past";
+            }
+            else{
+                if(mysqli_num_rows($catchose) == 0){
+                    $catinput = $conn -> prepare("INSERT INTO kategories(kategorie) VALUES(?)");
+                    $catinput -> bind_param("s", $category);
+                    $catinput -> execute();
+                    $catid = "SELECT kid FROM kategories WHERE kategorie = '$category'";
+
+                    //the id from the input category is selected
+                    $query = mysqli_query($conn, $catid);
+                    $id = mysqli_fetch_assoc($query);
+                    $kid = $id["kid"];
+                    
+                    //if title exists
+                    if(mysqli_num_rows($titleprove) == 0){
+                        $input -> execute();
+                        
+                    }
+                    else{
+                        echo "the title: $title, already exists";
+                    }
+                    
+                }
+                //if category exists
+                else {
+                    $catid = "SELECT kid FROM kategories WHERE kategorie = '$category'";
+
+                    //the id from the input category is selected
+                    $query = mysqli_query($conn, $catid);
+                    $id = mysqli_fetch_assoc($query);
+                    $kid = $id["kid"];
+                    if(mysqli_num_rows($titleprove) == 0){
+                        $input -> execute();
+                        
+                    }
+                    else{
+                        echo "the title: $title, already exists";
+                    }
+                }
+            }  
         }
 
         ?>

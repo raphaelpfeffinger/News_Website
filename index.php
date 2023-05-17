@@ -15,6 +15,7 @@
 
         <?php
         require "cb_conn.php";
+        require "create_news.php";
         if(! isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] = 0){
             echo "<a href='login.php'>Login</a><br>";
             echo "<a href='register.php'>Register</a>";
@@ -29,10 +30,10 @@
                 unset($_SESSION["Benutzername"]);
                 session_destroy();
             }
+            $currentdate = date("Y-m-d");
+            $date = "SELECT gueltigBis FROM news";
         }
-        $currentdate= date("now");
-        settype($currentdate, 'int');
-        echo $currentdate;
+        
         
 
         ?>
