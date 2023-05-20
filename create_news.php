@@ -88,6 +88,7 @@
                     if(mysqli_num_rows($titleprove) == 0){
                         $input -> execute();
                         
+                        
                     }
                     else{
                         echo "the title: $title, already exists";

@@ -15,7 +15,6 @@
 
         <?php
         require "cb_conn.php";
-        require "create_news.php";
         if(! isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] = 0){
             echo "<a href='login.php'>Login</a><br>";
             echo "<a href='register.php'>Register</a>";
@@ -30,8 +29,28 @@
                 unset($_SESSION["Benutzername"]);
                 session_destroy();
             }
-            $currentdate = date("Y-m-d");
-            $date = "SELECT gueltigBis FROM news";
+            
+                
+            }
+           
+        $count = "SELECT COUNT(*) AS num_rows FROM news";
+        $result1 = mysqli_query($conn, $count);
+        $row = mysqli_fetch_assoc($result1);
+        $currentdate = date("Y-m-d");
+        echo $row["num_rows"];
+        
+        for($i = 1; $i < $row["num_rows"]; $i++) {
+
+            $escape = mysqli_real_escape_string($conn, $i);
+            $correct = "SELECT * FROM news WHERE gueltigBis >= '$currentdate' AND newsID = '$i' AND gueltigVon <= '$currentdate'";
+            $result = mysqli_query($conn, $correct);
+            
+            if($result && mysqli_num_rows($result) > 0){
+                $query = mysqli_fetch_assoc($result);
+                echo $query["titel"] . "<br>";
+            } 
+            
+            
         }
         
         

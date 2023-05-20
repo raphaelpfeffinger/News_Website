@@ -59,10 +59,20 @@
         $land = $_POST['land'];
         $telefon = $_POST['telefon'];
         $email = $_POST['email'];
+
+        $query = "SELECT * FROM users WHERE Benutzername = '$username'";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_assoc($result);
+        $hash = $row['Passwort'];
+        $userId = $row['uid'];
         
         $prove = $conn -> query("SELECT * FROM users WHERE Benutzername= '$username'");
         if(mysqli_num_rows($prove) == 0){
             $stmt -> execute();
+            $_SESSION["Benutzername"] = $username;
+            $_SESSION["loggedin"] = true;
+            $_SESSION["userid"] = $userId;
+            header("location: index.php");
         }
         else{
             echo "The username: $username, already exists";
