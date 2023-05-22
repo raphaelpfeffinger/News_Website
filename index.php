@@ -8,21 +8,25 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <a href="index.php">Home</a>
-        <a href="index.php"><img src="logo.png" id="logo"></a>
-        <a href="archive.php">Archive</a>
-        
-
+        <a href="index.php"><img src="raphi_logo.png" id="logo" width="12%"></a>
         <?php
         require "cb_conn.php";
         if(! isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] = 0){
-            echo "<a href='login.php'>Login</a><br>";
-            echo "<a href='register.php'>Register</a>";
+            echo "<div id='loginpages'>
+            <a href='index.php' id='links'>Home</a>
+            <a href='login.php' id='links'>Login</a>
+            <a href='register.php' id='links'>Register</a>
+            <a href='archive.php' id='links'>Archive</a>
+            </div>";
         } else if($_SESSION["loggedin"] = 1){
-            echo "<a href='create_news.php'>make news</a>";
-            echo "<form action='index.php' method='post'>
+            echo "<div id='loggedinpages'>
+            <a href='create_news.php'>make news</a>
+            <form action='index.php' method='post'>
             <input type='submit' name='logout' id='logout' value='logout'>
-            </form>";
+            </form>
+            <a href='archive.php'>Archive</a>
+            </div>";
+            echo "<a href='change_password.php'>change password</a>";
             if(isset($_POST["logout"])){
                 $_SESSION = array();
                 unset($_SESSION["loggedin"]);
@@ -31,7 +35,7 @@
             }
             
                 
-            }
+        }
            
         $count = "SELECT COUNT(*) AS num_rows FROM news";
         $result1 = mysqli_query($conn, $count);
@@ -47,7 +51,7 @@
             
             if($result && mysqli_num_rows($result) > 0){
                 $query = mysqli_fetch_assoc($result);
-                echo $query["titel"] . "<br>";
+                echo $query["titel"] . $query["inhalt"] . "<br>";
             } 
             
             

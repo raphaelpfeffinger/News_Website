@@ -24,7 +24,7 @@
         <label for="img">Bild zum Artikel</label>
         <input type="file" id="img" name="img"><br>
         <label for="link" >Quelle einfügen</label>
-        <input type="text" id="source" name="source" required><br>
+        <input type="url" id="source" name="source" required><br>
         <input type="submit" name="submit" id="submit">
         <?php
         require "cb_conn.php";
@@ -32,7 +32,7 @@
             
             //prepared Statement
             $input = $conn -> prepare("INSERT INTO news(titel, inhalt, gueltigVon, gueltigBis, erstelltam, kid, link, bild, autor) VALUES(?,?,?,?,?,?,?,?,?)");
-            $input -> bind_param("sssssssss", $title, $content, $datefrom, $dateto, $CurrentDate, $kid, $src, $image, $autor);
+            $input -> bind_param("sssssssss", $title, $content, $datefrom, $dateto, $CurrentDate, $kid, $source, $image, $autor);
 
             //define variables
             $title = $_POST["title"];
@@ -52,7 +52,7 @@
             
 
             //if the category doesnt exists it will be inserted into kategories
-            if($datefrom < $CurrentDate || $dateto < $CurrentDate && $dateto < $datefrom){
+            if($dateto < $CurrentDate && $dateto < $datefrom){
                 echo "can't be in the past";
             }
             else{

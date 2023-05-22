@@ -9,37 +9,40 @@
     <title>Document</title>
 </head>
 <body>
-<a href="index.php"><img src="logo.png" id="logo"></a>
-<form action="register.php" method="post">
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username" required><br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required><br>
-        <label for="anrede">Anrede:</label>
-        <select name="anrede" id="anrede">
-            <option value="Herr">Herr</option>
-            <option value="Frau">Frau</option>
-            <option value="Divers">Divers</option>
-        </select><br>
-        <label for="vorname">Vorname</label>
-        <input type="text" name="vorname" id="vorname" required><br>
-        <label for="nachname">Nachname</label>
-        <input type="text" name="nachname" id="nachname" required><br>
-        <label for="strasse">Strasse</label>
-        <input type="text" name="strasse" id="strasse"><br>
-        <label for="plz">PLZ</label>
-        <input type="text" name="plz" id="plz"><br>
-        <label for="ort">Ort</label>
-        <input type="text" name="ort" id="ort"><br>
-        <label for="land">Land</label>
-        <input type="text" name="land" id="land"><br>
-        <label for="telefon">Telefon</label>
-        <input type="text" name="telefon" id="telefon"><br>
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email"><br>
-        <input type="submit" value="Register" name="submit"><br>
-    </form>
-    <a href="login.php">already registered?</a>;
+<a href="index.php"><img src="raphi_logo.png" id="logo" width="12%"></a>
+<div id="register">
+    <form action="register.php" method="post">
+            <label for="username">Username:</label><br>
+            <input type="text" name="username" id="username" required><br>
+            <label for="password">Password:</label><br>
+            <input type="password" name="password" id="password" required><br>
+            <label for="anrede">Anrede:</label><br>
+            <select name="anrede" id="anrede">
+                <option value="Herr">Herr</option>
+                <option value="Frau">Frau</option>
+                <option value="Divers">Divers</option>
+            </select><br>
+            <label for="vorname">Vorname</label><br>
+            <input type="text" name="vorname" id="vorname" required><br>
+            <label for="nachname">Nachname</label><br>
+            <input type="text" name="nachname" id="nachname" required><br>
+            <label for="strasse">Strasse</label><br>
+            <input type="text" name="strasse" id="strasse"><br>
+            <label for="plz">PLZ</label><br>
+            <input type="text" name="plz" id="plz"><br>
+            <label for="ort">Ort</label><br>
+            <input type="text" name="ort" id="ort"><br>
+            <label for="land">Land</label><br>
+            <input type="text" name="land" id="land"><br>
+            <label for="telefon">Telefon</label><br>
+            <input type="text" name="telefon" id="telefon"><br>
+            <label for="email">Email:</label><br>
+            <input type="email" name="email" id="email"><br>
+            <input type="submit" value="Register" name="submit"><br>
+            <a href="login.php">already registered?</a>;
+
+        </form>
+    </div>
     <?php require "cb_conn.php"; ?>
     <?php
     if(isset($_POST['submit'])){
