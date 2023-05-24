@@ -1,5 +1,4 @@
-<?php session_start(); 
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -37,22 +36,48 @@
                 
         }
            
-        $count = "SELECT COUNT(*) AS num_rows FROM news";
-        $result1 = mysqli_query($conn, $count);
-        $row = mysqli_fetch_assoc($result1);
-        $currentdate = date("Y-m-d");
-        echo $row["num_rows"];
         
-        for($i = 1; $i < $row["num_rows"]; $i++) {
+        $currentdate = date("Y-m-d");
 
-            $escape = mysqli_real_escape_string($conn, $i);
-            $correct = "SELECT * FROM news WHERE gueltigBis >= '$currentdate' AND newsID = '$i' AND gueltigVon <= '$currentdate'";
-            $result = mysqli_query($conn, $correct);
+        $correct = "SELECT * FROM news";
+        $result = mysqli_query($conn, $correct);
+        foreach ($result as $i) {
             
-            if($result && mysqli_num_rows($result) > 0){
-                $query = mysqli_fetch_assoc($result);
-                echo $query["titel"] . $query["inhalt"] . "<br>";
-            } 
+            if ($i["gueltigBis"] > $currentdate and $i["gueltigVon"] <= $currentdate){
+                $title = $i["titel"];
+                $content = $i["inhalt"];
+                $datefrom = $i["gueltigVon"];
+                $dateto = $i["gueltigBis"];
+                $category = $i["kid"];
+                $image = $i["bild"];
+                $link = $i["link"];
+                $author = $i["autor"];
+                //category from number to string
+                $kategorie = "SELECT * FROM kategories WHERE kid = '$category'";
+                $result3 = mysqli_query($conn, $kategorie);
+                $row2 = mysqli_fetch_assoc($result3);
+                $categorysel = $row2["kategorie"];
+                //autor from number to string
+                $autor = "SELECT Benutzername FROM users WHERE uid = '$author'";
+                $result4 = mysqli_query($conn, $autor);
+                $row2 = mysqli_fetch_assoc($result4);
+                $autorsel = $row2["Benutzername"];
+
+                //image prep
+                //$imagedata = file_get_contents($image);
+                if($image == NULL){
+                    $image = "no image";
+                    echo "<div id='news'> Titel: $title <br>
+                     Inhalt: $content <br>
+                      Gültig von: $datefrom <br>
+                       Gültig bis: $dateto <br>
+                        Kategorie: $categorysel <br>
+                         Link:<a href='$link' target ='_blank'>quelle</a> <br> Autor: $autorsel <br> </div><br>";
+                }else{
+
+                    echo "<div id='news'> Titel: $title <br> Inhalt: $content <br> Gültig von: $datefrom <br> Gültig bis: $dateto <br> Kategorie: $categorysel <br> Bild: <img src='$image' width= 10%> <br> Link:<a href='$link' target ='_blank'>quelle</a> <br> Autor: $autorsel <br> </div><br>";
+                }
+            }
             
             
         }

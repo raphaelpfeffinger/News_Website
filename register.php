@@ -52,7 +52,6 @@
         $stmt = $conn -> prepare("INSERT INTO users (Benutzername, Passwort, Anrede, Vorname, Nachname, Strasse, PLZ, Ort, Land, EMail_Adresse, Telefon) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt -> bind_param("sssssssssss",$username, $passwordhashed, $anrede, $vorname, $nachname, $strasse, $plz, $ort, $land, $telefon, $email);
         $username = $_POST['username'];
-      
         $anrede = $_POST['anrede'];
         $vorname = $_POST['vorname'];
         $nachname = $_POST['nachname'];

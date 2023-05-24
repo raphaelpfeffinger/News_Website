@@ -22,7 +22,7 @@
         <label for="category">Category:</label>
         <input type="text" id="category" name="category"required><br>
         <label for="img">Bild zum Artikel</label>
-        <input type="file" id="img" name="img"><br>
+        <input type="url" id="img" name="img" required><br>
         <label for="link" >Quelle einfügen</label>
         <input type="url" id="source" name="source" required><br>
         <input type="submit" name="submit" id="submit">
