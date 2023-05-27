@@ -10,6 +10,7 @@
 </head>
 <body>
     <a href="index.php"><img src="raphi_logo.png" id="logo" width="12%"></a>
+    <h1>Archiv</h1>
     <?php 
         require "cb_conn.php";
         $currentdate = date("Y-m-d");
@@ -36,19 +37,13 @@
             $row2 = mysqli_fetch_assoc($result4);
             $autorsel = $row2["Benutzername"];
 
+            
             echo "<div id='news'> Titel: $title <br> Inhalt: $content <br> Gültig von: $datefrom <br> Gültig bis: $dateto <br> Kategorie: $categorysel <br> Bild: <img src='$image'> <br> Link:<a href='$link' target ='_blank'>quelle</a> <br> Autor: $autorsel <br> </div><br>";
         
             
         }
-        $catcount = "SELECT COUNT(*) AS num_rows FROM kategories";
-        $result2 = mysqli_query($conn, $catcount);
-        $row2 = mysqli_fetch_assoc($result2);
 
-        /*$catname = "SELECT name";
-        for($y = 0; $y < $row2["num_rows"]; $y++){
-            echo "<select name='sort' id='sort'>
-            <option value=''"
-        }*/
+        
     
     ?>
 </body>

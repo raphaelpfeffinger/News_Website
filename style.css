@@ -1,135 +1,144 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
 body{
 
-    background-color: rgb(49, 31, 58);
+    background-color: #1e2833;
 
 }
-#main{
-    background-color: rgba(86, 85, 138, 0.726);
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    padding: 0;
-    text-align: center;
-}
-#divlogin{
-    font-family: 'Roboto Mono', sans-serif;
-    border: solid 2px rgb(229, 57, 83);
-    width: 35%;
-    height: 350px;
-    margin: 0 auto;
-    padding: auto;
-    text-align: center;
-    position: center;
-    color: rgb(229, 57, 83);
-    border-radius:  25px;
-    font-size: 18px;
-}
-input[type=text], input[type=password] {
-    background-color: transparent;
-    border: solid 2px rgb(229, 57, 83);
-    border-radius: 25px;
+div{
+    border: solid 2px #40566e;
+    border-radius: 12px;
+    font-family: "Roboto Mono", monospace;  
     color: white;
     position: relative;
-}
-input[type=submit]{
-    border: solid 2px rgb(229, 57, 83);
-    border-radius: 25px;
-    background-color: rgb(229, 57, 83);
-    color: rgb(49, 31, 58);
-    font-family: monospace;
-    font-size: 18px;
-}
-#signup{
-    color:rgb(229, 57, 83);
-    
-}
-#signup:hover{
-    color: white;
-    
-}
-input[type=submit]:hover{
-   background-color: rgb(49, 31, 58);
-   color:rgb(229, 57, 83);
 
 }
-#logintitle{
-    font-weight: normal;
-    font-family: 'Roboto Mono', sans-serif;
+h1{
+    text-align: center;
+    font-family: "Roboto Mono", monospace;
+    color:white;
 }
-#loginpages{
-    font-family: 'Roboto Mono', sans-serif;
-    font-size: 18px;
-    color: rgb(229, 57, 83);
-    border: solid 2px rgb(229, 57, 83);
-    
+input[type = submit]{
+    background-color: transparent;
+    border: solid 2px #40566e;
+    border-radius: 12px;
+    color: white;
+    font-family: "Roboto Mono", monospace;  
+    font-size: 15px;
+    padding: 5px;
+    margin: 5px;
+    height: 90%;
 }
-@keyframes blink {
+input[type = submit]:hover{
+    background-color: #40566e;
+}
+input[type = text], input[type = password], input[type = email], select{
+    background-color: #40566e50;
+    border: solid 2px  #40566e;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+}
+select{
+    width: 168px;
+    height: 23px;
+}
+select:focus{
+    background-color: #1e2833;
+    border:solid 2px #40566e;
+}
+#register{
+    margin-left: 350px;
+    margin-right: 350px;
+    margin-bottom: 30px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+#registerlink{
+    border: none;
+}
+#divlogin{
+    margin: 30px;
+    margin-left: 350px;
+    margin-right: 350px;
+    position: relative;
+    padding: 30px;
+    text-align: center;
+}
+text{
+    position: relative;
+}
+#label{
+    border: none;
+}
+a{
+    color:#516d8a;
+}
+a:hover{
+    color: white;
+}
+@keyframes blink{
     0% { opacity: 1; }
     50% { opacity: 0; }
     100% { opacity: 1; }
 }
 h4{
-    font-family: 'Roboto Mono', sans-serif;
-    border: solid 2px rgb(229, 57, 83);
+    border: solid 2px #40566e;
     text-align: center;
-    color:rgb(229, 57, 83);
-    animation: blink 0.5s linear 3; 
-    width: 20%; 
-    position: relative;
-    left: 40%;
-    border-radius: 12px;
+    font-family: "Roboto Mono", monospace;
+    color: white;
+    border-radius: 5px;
+    margin-left: 450px;
+    margin-right: 450px;
+    animation: blink 0.5s 3;
+    padding: 5px;
 }
-#loginpages{
-    height: 80px;
-    margin-left: 150px;
+table{
+   border: solid 2px #40566e;
+   border-collapse: collapse;
+   color: white;
+   font-family: "Roboto Mono", monospace;
+   border-radius: 12px;
+}
+th{
+    border: solid 2px #40566e;
+    padding: 5px;
     border-radius: 12px;
-    margin-top: -75px;
-    color:rgb(229, 57, 83);
-    font-size: 20px;
 
 }
-#links{
-    padding: 70px;
-    color:rgb(229, 57, 83);
-    top: 30px;
-}
-#links:hover{
-    color: white;
-}
-#register{
-    text-align: center;
-    border: solid 2px rgb(229, 57, 83);
-    border-radius: 25px;
-    font-family: 'Roboto Mono', sans-serif;
-    color:rgb(229, 57, 83);
-    width: 50%;
-}
-#anrede{
-    border: solid 2px rgb(229, 57, 83);
-    width: 170px;
-    background-color: transparent;
-    color:rgb(229, 57, 83);
+
+td{
+    border: solid 2px #40566e;
+    padding: 5px;
     border-radius: 12px;
-    appearance: none;
-    
-}
-option{
-    background-color:rgb(49, 31, 58);
-    border: solid 2px rgb(229, 57, 83);
-    border-radius: 12px;
-}
-    
-#email{
-    border: solid 2px rgb(229, 57, 83);
-    border-radius: 12px;
-    background-color: transparent;
-    color:rgb(229, 57, 83);
+
 }
 #news{
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+#newsimage{
+    
+}
+#image{
+    border: none;
+    
+}
+#newsinhalt{
+    font-family: "Roboto Mono", monospace;
     color: white;
-    font-family: 'Roboto Mono', sans-serif;
+}
+#changep{
     text-align: center;
-    border: 2px solid rgb(229, 57, 83);
-    border-radius: 12px;
+    margin-left: 350px;
+    margin-right: 350px;
+}
+g{
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 10px;
 }

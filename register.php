@@ -6,45 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Registrieren</title>
 </head>
 <body>
 <a href="index.php"><img src="raphi_logo.png" id="logo" width="12%"></a>
 <div id="register">
     <form action="register.php" method="post">
-            <label for="username">Username:</label><br>
-            <input type="text" name="username" id="username" required><br>
-            <label for="password">Password:</label><br>
-            <input type="password" name="password" id="password" required><br>
-            <label for="anrede">Anrede:</label><br>
+            <h1>Register</h1><br>
+            <label for="username" id="labelreg">*Benutzername:</label>
+            <input type="text" name="username" id="username" required><br><br>
+            <label for="password" id="labelreg">*Passwort:</label>
+            <input type="password" name="password" id="password" required><br><br><br>
+            <label for="vorname">*Vorname:</label>
+            <input type="text" name="vorname" id="vorname" required><br><br>
+            <label for="nachname">*Nachname:</label>
+            <input type="text" name="nachname" id="nachname" required><br><br>
+            <label for="anrede">Anrede:</label>
             <select name="anrede" id="anrede">
                 <option value="Herr">Herr</option>
                 <option value="Frau">Frau</option>
-                <option value="Divers">Divers</option>
-            </select><br>
-            <label for="vorname">Vorname</label><br>
-            <input type="text" name="vorname" id="vorname" required><br>
-            <label for="nachname">Nachname</label><br>
-            <input type="text" name="nachname" id="nachname" required><br>
-            <label for="strasse">Strasse</label><br>
-            <input type="text" name="strasse" id="strasse"><br>
-            <label for="plz">PLZ</label><br>
-            <input type="text" name="plz" id="plz"><br>
-            <label for="ort">Ort</label><br>
-            <input type="text" name="ort" id="ort"><br>
-            <label for="land">Land</label><br>
-            <input type="text" name="land" id="land"><br>
-            <label for="telefon">Telefon</label><br>
-            <input type="text" name="telefon" id="telefon"><br>
-            <label for="email">Email:</label><br>
-            <input type="email" name="email" id="email"><br>
-            <input type="submit" value="Register" name="submit"><br>
-            <a href="login.php">already registered?</a>;
+                <option value="Divers" selected>Divers</option>
+            </select><br><br>
+            <label for="strasse">Strasse:</label>
+            <input type="text" name="strasse" id="strasse"><br><br>
+            <label for="plz">PLZ:</label>
+            <input type="text" name="plz" id="plz"><br><br>
+            <label for="ort">Ort:</label>
+            <input type="text" name="ort" id="ort"><br><br>
+            <label for="land">Land:</label>
+            <input type="text" name="land" id="land"><br><br>
+            <label for="telefon">Telefon</label>
+            <input type="text" name="telefon" id="telefon"><br><br>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email"><br><br>
+            <input type="submit" value="Register" name="submit">
+            <a href="login.php">Schon registriert?</a>
 
         </form>
     </div>
-    <?php require "cb_conn.php"; ?>
-    <?php
+    <?php require "cb_conn.php";
     if(isset($_POST['submit'])){
         $password = $_POST['password'];
         $passwordhashed = password_hash($password, PASSWORD_DEFAULT);
@@ -62,22 +62,26 @@
         $telefon = $_POST['telefon'];
         $email = $_POST['email'];
 
-        $query = "SELECT * FROM users WHERE Benutzername = '$username'";
-        $result = mysqli_query($conn, $query);
-        $row = mysqli_fetch_assoc($result);
-        $hash = $row['Passwort'];
-        $userId = $row['uid'];
+        
         
         $prove = $conn -> query("SELECT * FROM users WHERE Benutzername= '$username'");
         if(mysqli_num_rows($prove) == 0){
             $stmt -> execute();
+            $query = "SELECT * FROM users WHERE Benutzername = '$username'";
+            $result = mysqli_query($conn, $query);
+            $row = mysqli_fetch_assoc($result);
+            $hash = $row['Passwort'];
+            $userIdreg = $row["uid"];
             $_SESSION["Benutzername"] = $username;
             $_SESSION["loggedin"] = true;
-            $_SESSION["userid"] = $userId;
+            $_SESSION["userid"] = $userIdreg;
             header("location: index.php");
         }
         else{
-            echo "The username: $username, already exists";
+            echo "<h4>Der Benutzername: $username, existiert bereits!</h4>";
+            $_SESSION["Benutzername"] = "nobody";
+            $_SESSION["loggedin"] = false;
+
         }
        
 

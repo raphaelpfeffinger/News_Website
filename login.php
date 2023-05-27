@@ -18,14 +18,16 @@
         <form action="login.php" method="post">
             
             <h1 id="logintitle">Login</h1>
-            <label for="username">Username</label><br>
+            <div id="label">
+                <label for="username">Benutzername:</label><br>
+            </div>
             <input type="text" name="username" id="username" required><br><br>
-            
-            <label for="password">Password</label><br>
-            
+            <div id="label">
+                <label for="password">Passwort:</label><br>
+            </div>
             <input type="password" name="password" id="password" required><br><br>
             
-            <div id="register">
+            <div id="registerlink">
                 <input type="submit" value="Login" name="submit" id="letsgo">
                 <a href="register.php" id="signup">Sign up</a>
             </div>
@@ -37,14 +39,13 @@
     if (isset($_POST['submit'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $prove = $conn -> query("SELECT * FROM users WHERE Benutzername = '$username'");
+        $prove = $conn -> query("SELECT Benutzername FROM users WHERE Benutzername = '$username'");
         if(mysqli_num_rows($prove) > 0){
             $query = "SELECT * FROM users WHERE Benutzername = '$username'";
             $result = mysqli_query($conn, $query);
             $row = mysqli_fetch_assoc($result);
             $hash = $row['Passwort'];
-            $userId = $row['uid'];
-
+            $userId = $row["uid"];
             if (password_verify($password, $hash)) {
                 $_SESSION["Benutzername"] = $username;
                 $_SESSION["loggedin"] = true;
