@@ -54,68 +54,69 @@
         $usernamelen = strlen($username);
 
         //mindestlänge wird geprüft
-        if($usernamelen < 2){
+        if(strpos($email, "@") == false){
+            echo "<h4>Email braucht ein @-Zeichen</h4>";
+        } else{
+            if($usernamelen < 2){
             echo "<h4>Benutzername darf nicht mehr als 20 Zeichen und nicht weniger als 2 zeichen haben!!</h4>";
-        } elseif($passwordlen < 8){
-            echo "<h4>Passwort muss mindestens 8 Zeichen haben!!</h4>";
-        } 
-        //fals die länge stimt
-        else{
-
-            //passwort wird gehashed
-            $passwordhashed = password_hash($password, PASSWORD_DEFAULT);
-            
-            //der insert befehl in die Datenbank wird vorbereitet
-            $stmt = $conn -> prepare("INSERT INTO users (Benutzername, Passwort, Anrede, Vorname, Nachname, Strasse, PLZ, Ort, Land, EMail_Adresse, Telefon) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt -> bind_param("sssssssssss",$username, $passwordhashed, $anrede, $vorname, $nachname, $strasse, $plz, $ort, $land, $email, $telefon);
-        
-            //die Werte des Formulars werden in Variabeln gespeichert
-            //unnötige Leerzeichen werden entfernt
-            $anrede = trim($_POST['anrede']);
-            $vorname = trim($_POST['vorname']);
-            $nachname = trim($_POST['nachname']);
-            $strasse = trim($_POST['strasse']);
-            $plz = trim($_POST['plz']);
-            $ort = trim($_POST['ort']);
-            $land = trim($_POST['land']);
-            $telefon = $_POST['telefon'];
-            //da die telefon nummer mehr als leerzeichen am ende und anfang haben müssen sie alle gelöscht werden
-            $telefon = str_replace(' ', '', $telefon);
-            $email = trim($_POST['email']);
-
-            
-
-            
-
-            
-            //es wird überprüft ob der Benutzername bereits existiert
-            $prove = $conn -> query("SELECT * FROM users WHERE Benutzername= '$username'");
-            if(mysqli_num_rows($prove) == 0){
-                //falls nicht wird es in die datenbank eingefügt
-                $stmt -> execute();
-
-                //query für die Session variable userid
-                $query = "SELECT * FROM users WHERE Benutzername = '$username'";
-                $result = mysqli_query($conn, $query);
-                $row = mysqli_fetch_assoc($result);
-                $userIdreg = $row["uid"];
-
-                //session variabeln werden definiert
-                $_SESSION["Benutzername"] = $username;
-                $_SESSION["loggedin"] = true;
-                $_SESSION["userid"] = $userIdreg;
-                header("location: index.php");
-            }
+            } elseif($passwordlen < 8){
+                echo "<h4>Passwort muss mindestens 8 Zeichen haben!!</h4>";
+            } 
+            //fals die länge stimt
             else{
-                //wird angezeigt falls der Benutzername schon existiert
-                echo "<h4>Der Benutzername: $username, existiert bereits!</h4>";
-                $_SESSION["Benutzername"] = "nobody";
-                $_SESSION["loggedin"] = false;
 
+                //passwort wird gehashed
+                $passwordhashed = password_hash($password, PASSWORD_DEFAULT);
+                
+                //der insert befehl in die Datenbank wird vorbereitet
+                $stmt = $conn -> prepare("INSERT INTO users (Benutzername, Passwort, Anrede, Vorname, Nachname, Strasse, PLZ, Ort, Land, EMail_Adresse, Telefon) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt -> bind_param("sssssssssss",$username, $passwordhashed, $anrede, $vorname, $nachname, $strasse, $plz, $ort, $land, $email, $telefon);
+            
+                //die Werte des Formulars werden in Variabeln gespeichert
+                //unnötige Leerzeichen werden entfernt
+                $anrede = trim($_POST['anrede']);
+                $vorname = trim($_POST['vorname']);
+                $nachname = trim($_POST['nachname']);
+                $strasse = trim($_POST['strasse']);
+                $plz = trim($_POST['plz']);
+                $ort = trim($_POST['ort']);
+                $land = trim($_POST['land']);
+                $telefon = $_POST['telefon'];
+                //da die telefon nummer mehr als leerzeichen am ende und anfang haben müssen sie alle gelöscht werden
+                $telefon = str_replace(' ', '', $telefon);
+                $email = trim($_POST['email']);
+
+                
+
+                
+
+                
+                //es wird überprüft ob der Benutzername bereits existiert
+                $prove = $conn -> query("SELECT * FROM users WHERE Benutzername= '$username'");
+                if(mysqli_num_rows($prove) == 0){
+                    //falls nicht wird es in die datenbank eingefügt
+                    $stmt -> execute();
+
+                    //query für die Session variable userid
+                    $query = "SELECT * FROM users WHERE Benutzername = '$username'";
+                    $result = mysqli_query($conn, $query);
+                    $row = mysqli_fetch_assoc($result);
+                    $userIdreg = $row["uid"];
+
+                    //session variabeln werden definiert
+                    $_SESSION["Benutzername"] = $username;
+                    $_SESSION["loggedin"] = true;
+                    $_SESSION["userid"] = $userIdreg;
+                    header("location: index.php");
+                }
+                else{
+                    //wird angezeigt falls der Benutzername schon existiert
+                    echo "<h4>Der Benutzername: $username, existiert bereits!</h4>";
+                    $_SESSION["Benutzername"] = "nobody";
+                    $_SESSION["loggedin"] = false;
+
+                }
             }
-        
-
-
         }
     }
     ?>
