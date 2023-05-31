@@ -29,7 +29,8 @@
             
             <div id="registerlink">
                 <input type="submit" value="Login" name="submit" id="letsgo">
-                <a href="register.php" id="signup">Sign up</a>
+                <a href="register.php" id="signup">Registrieren-></a><br>
+                <a href='index.php' id='links'><-Home</a>
             </div>
         </form>
     </div>
@@ -37,21 +38,32 @@
     <?php
     require "cb_conn.php";
     if (isset($_POST['submit'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        //wenn der submit button gedrückt wurde werden benutzername und passwort aus dem formular definiert
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
+
+        //der Benutzer mit dem Namen wird aus der Tabelle genommen
         $prove = $conn -> query("SELECT Benutzername FROM users WHERE Benutzername = '$username'");
+
+        //wenn die query höher als 0 ist
         if(mysqli_num_rows($prove) > 0){
+
+            //alle nutzerdaten werden in variabeln gespeichert
             $query = "SELECT * FROM users WHERE Benutzername = '$username'";
             $result = mysqli_query($conn, $query);
             $row = mysqli_fetch_assoc($result);
             $hash = $row['Passwort'];
             $userId = $row["uid"];
+
+            //das eingegebene Passwort wird mit dem hash abgegleicht
             if (password_verify($password, $hash)) {
+                //falls das Passwort stimmt wird die Session gestartet
                 $_SESSION["Benutzername"] = $username;
                 $_SESSION["loggedin"] = true;
                 $_SESSION["userid"] = $userId;
                 header("location: index.php");
             } else {
+                //falls nicht wird die Fehlermeldung angezeigt
                 $_SESSION["Benutzername"] = "Nobody";
                 $_SESSION["loggedin"] = false;
                 echo "<h4>The Password or the Username is wrong</h4>";

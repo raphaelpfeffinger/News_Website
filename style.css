@@ -31,7 +31,7 @@ input[type = submit]{
 input[type = submit]:hover{
     background-color: #40566e;
 }
-input[type = text], input[type = password], input[type = email], select{
+input[type = text], input[type = password], input[type = email], select, input[type = date], textarea, input[type = url]{
     background-color: #40566e50;
     border: solid 2px  #40566e;
     border-radius: 5px;
@@ -95,12 +95,17 @@ h4{
     animation: blink 0.5s 3;
     padding: 5px;
 }
+#success{
+    animation:none;
+}
 table{
    border: solid 2px #40566e;
    border-collapse: collapse;
    color: white;
    font-family: "Roboto Mono", monospace;
    border-radius: 12px;
+   text-align: center;
+   margin-left: 40%;
 }
 th{
     border: solid 2px #40566e;
@@ -117,16 +122,10 @@ td{
 }
 #news{
     font-size: 14px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-}
-#newsimage{
     
 }
 #image{
     border: none;
-    
 }
 #newsinhalt{
     font-family: "Roboto Mono", monospace;
@@ -141,4 +140,66 @@ g{
     font-weight: bold;
     font-size: 20px;
     margin-left: 10px;
+    color: rgb(70, 139, 70)
+}
+#loggedinpages{
+    text-align: center;
+}
+ul{
+   
+    float: left;
+    width:auto;
+    border: solid 2px #40566e;
+    margin-left: 180px;
+    border-radius: 12px;
+    font-size: 20px;
+}
+li{
+    display: inline-block;
+    padding: 15px 30px;
+    font-family: "Roboto Mono", monospace;
+
+}
+#logoindex{
+    position:absolute;
+    float:left;
+}
+header{
+    width: 100%;
+    position: relative;
+}
+#makecat{
+    text-align: center;
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-bottom: 80px;
+}
+#createnews{
+    align-items: center;
+    text-align: center;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+#createnewstable{
+    border: none;
+    text-align: right;
+    align-items: left;
+    margin-left: 150px;
+    margin-right: 10px;
+}
+#crows{
+    border: none;
+
+}
+#ccells{
+    border: none;
+}
+#profile{
+    text-align: center;
+    align-items: center;
+    margin-left: 350px;
+    margin-right: 350px;
+}
+#delacc{
+    margin-top: 60px;
 }
